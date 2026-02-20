@@ -69,6 +69,15 @@ Frontend (React + Vite)\
 -   Remediation guidance
 -   PDF export
 
+###   Architecture Summary
+Frontend (React) communicates with a FastAPI backend. An agentic AI orchestrator selects the
+appropriate detection engine. Results are processed for risk scoring and mapped to MITRE and
+compliance controls. All scan results are stored in PostgreSQL for reporting and analytics.
+
+### Conclusion
+The project demonstrates the integration of AI-driven threat detection with compliance intelligence
+and executive reporting. The modul
+
 ------------------------------------------------------------------------
 
 ## 🐳 Deployment
@@ -96,6 +105,8 @@ Aligns detection with structured adversary techniques.
 -  How is it enterprise-ready?
 Containerized deployment and modular architecture.
 ------------------------------------------------------------------------
+<img width="1081" height="976" alt="image" src="https://github.com/user-attachments/assets/6282ed55-7594-47ef-ab77-cd6ea6bf1403" />
+
 
 ## 📜 License
 

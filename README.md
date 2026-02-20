@@ -87,7 +87,16 @@ Frontend: http://localhost:5173\
 Backend Docs: http://localhost:8000/docs
 
 ------------------------------------------------------------------------
+-  What problem does your project solve?
+It detects phishing using AI and maps threats to compliance frameworks.
+-  Why hybrid model?
+Combines deterministic rules with probabilistic ML for better accuracy.
+-  How is MITRE mapping useful?
+Aligns detection with structured adversary techniques.
+-  How is it enterprise-ready?
+Containerized deployment and modular architecture.
+------------------------------------------------------------------------
 
 ## 📜 License
 
-Educational / Academic Project
+Educational / Academic Personal Project

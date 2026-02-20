@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres:15
+    container_name: autocomply_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: autocomply
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    container_name: autocomply_backend
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/autocomply
+    ports:
+      - "8000:8000"
+    volumes:
+      - /Users/deepikakothamasu/Documents/GitHub/AutoComplyAI_Enterprise_NoGaps/backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: autocomply_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    volumes:
+      - /Users/deepikakothamasu/Documents/GitHub/AutoComplyAI_Enterprise_NoGaps/frontend:/app
+    command: sh -c "npm install && npm run dev -- --host"
+
+volumes:
+  postgres_data:

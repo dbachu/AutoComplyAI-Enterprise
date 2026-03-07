@@ -37,6 +37,13 @@ def analyze_with_openai(text: str):
             "reasons": [str(e)]
         }
 '''
+import os
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not OPENAI_API_KEY:
+     print("⚠️ OPENAI_API_KEY not configured. OpenAI agent disabled.")
+
 def analyze_with_openai(text: str):
     # Mock LLM reasoning
     if "password" in text.lower() or "verify" in text.lower():

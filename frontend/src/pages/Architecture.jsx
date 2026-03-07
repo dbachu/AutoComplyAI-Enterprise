@@ -1,84 +1,222 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+/* ----------------------------- */
+/* SERVICE DATA                  */
+/* ----------------------------- */
+
 export default function Architecture() {
   const [activeBox, setActiveBox] = useState(null);
 
   const services = [
     {
       key: "frontend",
-      title: "Frontend",
-      subtitle: "React + Vite",
-      desc: "Interactive SOC dashboard with analytics, exports and threat visibility."
+      title: "SOC Frontend",
+      subtitle: "React + Vite Dashboard",
+      sections: [
+        {
+          heading: "Capabilities",
+          items: [
+            "Security Operations Center (SOC) dashboard",
+            "Threat feed and analytics visualizations",
+            "Interactive risk charts and MITRE heatmaps",
+            "Decision breakdown visualization",
+            "AI agent reasoning timeline"
+          ]
+        },
+        {
+          heading: "Operational Value",
+          items: [
+            "Real-time threat visibility",
+            "Interactive investigation workflows",
+            "Executive security reporting",
+            "SOC analyst productivity tools"
+          ]
+        }
+      ]
     },
     {
       key: "backend",
       title: "FastAPI Backend",
-      subtitle: "REST API Layer",
-      desc: "Handles scan requests, orchestration and report generation."
+      subtitle: "AI Security API Layer",
+      sections: [
+        {
+          heading: "Core Responsibilities",
+          items: [
+            "Receives threat analysis requests",
+            "Coordinates AI detection pipeline",
+            "Generates structured incident reports",
+            "Exposes REST endpoints to UI"
+          ]
+        },
+        {
+          heading: "Engineering Benefits",
+          items: [
+            "High-performance async API",
+            "Scalable microservice foundation",
+            "Clean separation of frontend and AI logic"
+          ]
+        }
+      ]
     },
     {
       key: "orchestrator",
-      title: "Agent Orchestrator",
-      subtitle: "AI Routing Engine",
-      desc: "Dynamically selects best detection engine based on risk signals."
+      title: "AI Agent Orchestrator",
+      subtitle: "Multi-Agent Reasoning Engine",
+      sections: [
+        {
+          heading: "AI Agent Pipeline",
+          items: [
+            "Detection Agent (Rule + ML + LLM)",
+            "Threat Intelligence Agent",
+            "MITRE Mapping Agent",
+            "Compliance Mapping Agent",
+            "Report Generation Agent"
+          ]
+        },
+        {
+          heading: "Intelligence Features",
+          items: [
+            "Hybrid ensemble decision engine",
+            "Risk score aggregation",
+            "Agent reasoning timeline generation",
+            "Explainable AI detection workflow"
+          ]
+        }
+      ]
     },
     {
       key: "engines",
       title: "Detection Engines",
       subtitle: "Rule | ML | LLM",
-      desc: "Multi-layer detection stack providing hybrid intelligence."
+      sections: [
+        {
+          heading: "Detection Layers",
+          items: [
+            "Rule-based phishing heuristics",
+            "Machine learning phishing classifier",
+            "LLM contextual threat analysis",
+            "Hybrid ensemble risk scoring"
+          ]
+        },
+        {
+          heading: "Security Advantages",
+          items: [
+            "Defense-in-depth detection",
+            "Reduced false positives",
+            "Context-aware threat detection",
+            "Explainable AI decisions"
+          ]
+        }
+      ]
+    },
+    {
+      key: "intel",
+      title: "Threat Intelligence",
+      subtitle: "Indicator Enrichment",
+      sections: [
+        {
+          heading: "Threat Analysis",
+          items: [
+            "URL extraction and analysis",
+            "Phishing pattern recognition",
+            "Domain entropy detection",
+            "External threat indicator enrichment"
+          ]
+        }
+      ]
     },
     {
       key: "mapper",
       title: "MITRE & Compliance",
-      subtitle: "ISO / NIST Mapping",
-      desc: "Maps threats to ATT&CK techniques and compliance controls."
+      subtitle: "ATT&CK + Governance Mapping",
+      sections: [
+        {
+          heading: "Security Intelligence",
+          items: [
+            "MITRE ATT&CK technique mapping",
+            "ISO 27001 security control mapping",
+            "NIST Cybersecurity Framework alignment",
+            "GDPR security compliance indicators"
+          ]
+        }
+      ]
     },
     {
       key: "db",
       title: "PostgreSQL",
-      subtitle: "Persistence Layer",
-      desc: "Stores scans, risk scores, mappings and audit logs."
+      subtitle: "Security Data Platform",
+      sections: [
+        {
+          heading: "Stored Intelligence",
+          items: [
+            "Threat detection results",
+            "Risk scores and classifications",
+            "MITRE and compliance mappings",
+            "Detection metadata and logs"
+          ]
+        }
+      ]
+    },
+    {
+      key: "infra",
+      title: "Container Infrastructure",
+      subtitle: "Podman Deployment",
+      sections: [
+        {
+          heading: "Deployment Architecture",
+          items: [
+            "Podman containerized services",
+            "Backend API container",
+            "Frontend dashboard container",
+            "PostgreSQL database container"
+          ]
+        }
+      ]
     }
   ];
 
   return (
     <div style={{ padding: "60px 40px", maxWidth: 1400, margin: "auto" }}>
-      <h1 style={{ fontSize: 34, fontWeight: 700 }}>
+      <h1 style={{ fontSize: 34, fontWeight: 700, textAlign: "center" }}>
         System (AI Enabled Intelligence) Architecture
       </h1>
 
-      <p style={{ marginTop: 15, fontSize: 20, color: "#555", maxWidth: 700 }}>
-        Real-time AI pipeline demonstrating detection flow, orchestration logic,
-        and compliance intelligence mapping.
+      <p style={{ marginTop: 15, fontSize: 20, color: "#555", textAlign: "center" }}>
+        Real-time AI pipeline demonstrating detection flow,
+        orchestration logic, and compliance intelligence mapping.
       </p>
 
       {/* FLOW CONTAINER */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 30,
-          marginTop: 90
-        }}
-      >
-        {services.map((service, index) => (
-          <div
-            key={service.key}
-            style={{ display: "flex", alignItems: "center" }}
-          >
-            <ServiceBox
-              service={service}
-              onClick={() => setActiveBox(service)}
-            />
-            {index < services.length - 1 && <DataStream />}
-          </div>
-        ))}
+
+      <div style={{ marginTop: 90 }}>
+
+        {/* FIRST ROW */}
+
+        <div style={{ display: "flex", justifyContent: "center", gap: 10 }}>
+          {services.slice(0, 4).map((service, index) => (
+            <div key={service.key} style={{ display: "flex", alignItems: "center" }}>
+              <ServiceBox service={service} onClick={() => setActiveBox(service)} />
+              {index < 3 && <DataStream />}
+            </div>
+          ))}
+        </div>
+
+        {/* SECOND ROW */}
+
+        <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 40 }}>
+          {services.slice(4).map((service, index) => (
+            <div key={service.key} style={{ display: "flex", alignItems: "center" }}>
+              <ServiceBox service={service} onClick={() => setActiveBox(service)} />
+              {index < services.slice(4).length - 1 && <DataStream />}
+            </div>
+          ))}
+        </div>
+
       </div>
 
       {/* DETAIL PANEL */}
+
       {activeBox && (
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -88,40 +226,102 @@ export default function Architecture() {
             marginTop: 80,
             padding: 40,
             background: "#eef3fb",
-            borderRadius: 16,
+            borderRadius: 20,
             maxWidth: 900,
-            marginLeft: "auto",
-            marginRight: "auto"
+            margin: "auto",
+            boxShadow: "0 15px 35px rgba(0,0,0,0.08)"
           }}
         >
-          <h3 style={{ fontSize: 22 }}>{activeBox.title}</h3>
-          <p style={{ marginTop: 15, fontSize: 18, lineHeight: 1.6 }}>
-            {activeBox.desc}
-          </p>
+          <h3 style={{ fontSize: 24, marginBottom: 20 }}>
+            {activeBox.title}
+          </h3>
+
+          {activeBox.sections.map((section, i) => (
+            <div key={i} style={{ marginBottom: 25 }}>
+              <div style={{ fontWeight: 600, marginBottom: 8, color: "#003366" }}>
+                {section.heading}
+              </div>
+
+              <ul style={{ paddingLeft: 20, lineHeight: 1.7 }}>
+                {section.items.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </motion.div>
       )}
 
-      {/* PRINCIPLES */}
-      <div
-        style={{
-          marginTop: 100,
-          padding: 40,
-          background: "#f4f6f9",
-          borderRadius: 16,
-          maxWidth: 900,
-          marginLeft: "auto",
-          marginRight: "auto"
-        }}
-      >
-        <h3 style={{ fontSize: 22 }}>Architecture Principles</h3>
-        <ul style={{ marginTop: 15, lineHeight: 1.8 }}>
-          <li>AI-driven detection orchestration</li>
-          <li>Compliance-aware threat intelligence mapping</li>
-          <li>Pluggable detection engines</li>
-          <li>API-first scalable backend</li>
-          <li>Containerized deployment (Podman/Docker)</li>
-        </ul>
+      {/* ARCHITECTURE PRINCIPLES */}
+
+      <div style={{ marginTop: 110, maxWidth: 1100, margin: "auto" }}>
+        <h3 style={{ fontSize: 26, textAlign: "center", marginBottom: 40 }}>
+          Architecture Principles
+        </h3>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 25
+          }}
+        >
+          {[
+            {
+              title: "AI Detection Orchestration",
+              desc: "Dynamic routing engine selects optimal detection strategy."
+            },
+            {
+              title: "Defense-in-Depth",
+              desc: "Rule + ML + LLM layered detection improves security accuracy."
+            },
+            {
+              title: "Compliance-by-Design",
+              desc: "Threat detections map automatically to MITRE, ISO and NIST."
+            },
+            {
+              title: "API-First Architecture",
+              desc: "Clear separation between UI, backend and AI engines."
+            },
+            {
+              title: "Extensible Detection Engines",
+              desc: "Detection models evolve independently."
+            },
+            {
+              title: "Auditability",
+              desc: "All scans stored with full traceability."
+            },
+            {
+              title: "Cloud-Ready Containers",
+              desc: "Podman enables portable enterprise deployments."
+            },
+            {
+              title: "Multi-Agent AI Reasoning",
+              desc: "Specialized AI agents collaborate for detection."
+            }
+          ].map((principle, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ scale: 1.05 }}
+              style={{
+                background: "white",
+                padding: 25,
+                borderRadius: 14,
+                boxShadow: "0 10px 25px rgba(0,0,0,0.08)"
+              }}
+            >
+              <div style={{ fontWeight: 700, marginBottom: 10 }}>
+                {principle.title}
+              </div>
+
+              <div style={{ color: "#555", lineHeight: 1.6 }}>
+                {principle.desc}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
+
     </div>
   );
 }
@@ -134,10 +334,7 @@ function ServiceBox({ service, onClick }) {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      whileHover={{
-        scale: 1.07,
-        boxShadow: "0 18px 35px rgba(0,0,0,0.18)"
-      }}
+      whileHover={{ scale: 1.07, boxShadow: "0 18px 35px rgba(0,0,0,0.25)" }}
       onClick={onClick}
       style={{
         background: "white",
@@ -166,8 +363,7 @@ function ServiceBox({ service, onClick }) {
             background: "#0072C6",
             color: "white",
             padding: "6px 10px",
-            borderRadius: 20,
-            display: "inline-block"
+            borderRadius: 20
           }}
         >
           AI Decision Engine
@@ -192,32 +388,15 @@ function DataStream() {
         overflow: "hidden"
       }}
     >
-      {/* White glow animation */}
       <motion.div
         animate={{ x: [-40, 100] }}
         transition={{ repeat: Infinity, duration: 1.6, ease: "linear" }}
         style={{
           position: "absolute",
-          top: 0,
           width: 30,
           height: 6,
           background: "white",
           opacity: 0.6
-        }}
-      />
-
-      {/* 🔴 Red Threat Particle */}
-      <motion.div
-        animate={{ x: [-10, 90] }}
-        transition={{ repeat: Infinity, duration: 2.2, ease: "linear" }}
-        style={{
-          position: "absolute",
-          top: -3,
-          width: 12,
-          height: 12,
-          background: "#E74C3C",
-          borderRadius: "50%",
-          boxShadow: "0 0 8px rgba(231,76,60,0.8)"
         }}
       />
     </div>

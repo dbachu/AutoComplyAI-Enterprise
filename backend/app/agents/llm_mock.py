@@ -1,22 +1,40 @@
-def analyze_with_mock_llm(text: str):
+def analyze_with_mock_llm(text):
 
-    reasoning = []
+    text_lower = text.lower()
 
-    if "http" in text.lower():
-        reasoning.append("Detected external link.")
-    if "urgent" in text.lower():
-        reasoning.append("Urgency language used.")
-    if "password" in text.lower():
-        reasoning.append("Credential harvesting pattern.")
+    risk = 0
+    reasons = []
 
-    risk = min(len(reasoning) * 30, 95)
-    verdict = "phishing" if risk > 50 else "legitimate"
+    # phishing indicators
+
+    if "verify" in text_lower:
+        risk += 30
+        reasons.append("Credential verification language detected")
+
+    if "bank" in text_lower:
+        risk += 30
+        reasons.append("Financial institution reference detected")
+
+    if "account" in text_lower:
+        risk += 20
+        reasons.append("Account access request detected")
+
+    if "http://" in text_lower or "https://" in text_lower:
+        risk += 30
+        reasons.append("External link detected")
+
+    if "urgent" in text_lower or "immediately" in text_lower:
+        risk += 20
+        reasons.append("Urgency language detected")
+
+    # cap risk score
+    risk = min(risk, 100)
+
+    verdict = "phishing" if risk >= 50 else "legitimate"
 
     return {
         "risk_score": risk,
-        "confidence": 0.88,
+        "confidence": 0.85,
         "verdict": verdict,
-        "mode": "llm_mock",
-        "reasons": reasoning,
-        "llm_explanation": "LLM-style reasoning simulation applied."
+        "reasons": reasons
     }
